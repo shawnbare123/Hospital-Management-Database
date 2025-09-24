@@ -35,6 +35,12 @@ def _fetchall(conn, sql: str, params: Optional[Iterable[Any]] = None) -> List[Di
     with conn.cursor(dictionary=True) as cur:
         cur.execute(sql, tuple(params) if params is not None else None)
         return list(cur.fetchall())
+    
+def _fetchone(conn, sql: str, params: Optional[Iterable[Any]] = None) -> Dict[str, Any]:
+    with conn.cursor(dictionary=True) as cur:
+        cur.execute(sql, tuple(params) if params is not None else None)
+        result = cur.fetchone()
+        return dict(result) if result else {}
 
 # ---------- health ----------
 def ping_db() -> bool:
@@ -92,12 +98,12 @@ def total_patients_count(
     FROM Patient p
     WHERE (%s IS NULL OR p.MRN = %s)
       AND (%s IS NULL OR p.First_Name LIKE CONCAT('%%', %s, '%%'))
-      AND (%s IS NULL OR p.Last_Name  LIKE CONCAT('%%', %s, '%%'));
+      AND (%s IS NULL OR p.Last_Name  LIKE CONCAT('%%', %s, '%%'));
     """
     params = [mrn, mrn, first, first, last, last]
     with get_conn() as conn:
-        rows = _fetchall(conn, sql, params)
-        return int(rows[0]["cnt"]) if rows else 0
+        result = _fetchone(conn, sql, params)
+    return int(result.get("cnt", 0))
 
 def medical_records_for_patient(mrn: int) -> List[Dict[str, Any]]:
     sql = """
@@ -154,8 +160,8 @@ def total_doctors_count(employee_id=None, first=None, last=None) -> int:
     """
     params = [employee_id, employee_id, first, first, last, last]
     with get_conn() as conn:
-        rows = _fetchall(conn, sql, params)
-        return int(rows[0]["cnt"]) if rows else 0
+        result = _fetchone(conn, sql, params)
+    return int(result.get("cnt", 0))
 
 def patients_for_doctor(employee_id: int) -> List[Dict[str, Any]]:
     sql = """
@@ -200,8 +206,8 @@ def total_medrecs_count(record_id=None, patient_mrn=None) -> int:
     """
     params = [record_id, record_id, patient_mrn, patient_mrn]
     with get_conn() as conn:
-        rows = _fetchall(conn, sql, params)
-        return int(rows[0]["cnt"]) if rows else 0
+        result = _fetchone(conn, sql, params)
+    return int(result.get("cnt", 0))
 
 # ---------- billing search ----------
 def find_billing(
