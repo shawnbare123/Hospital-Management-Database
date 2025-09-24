@@ -30,7 +30,7 @@ Expected:
 		[medical records rows...]
 		[billing rows...]
 
-What the module exposes (all return list[dict])
+What the module exposes (all return list[dict] except _count functions)
 - ping_db()
 - find_patients(...)
 - medical_records_for_patient(mrn)
