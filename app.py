@@ -65,7 +65,7 @@ class MainApp(tk.Tk):
         ttk.Button(parent_frame, text="Search", command=self.search_patients).grid(row=4, column=0, columnspan=2, pady=10)
 
         # Results field
-        self.patient_results_text = tk.Text(parent_frame, wrap=tk.WORD, height=20, width=70, state=tk.DISABLED)
+        self.patient_results_text = tk.Text(parent_frame, wrap=tk.WORD, height=20, width=70)
         self.patient_results_text.grid(row=5, column=0, columnspan=2, padx=5, pady=5, sticky="nsew")
 
         # Grid configuration
@@ -99,7 +99,7 @@ class MainApp(tk.Tk):
         # Creates input fields for doctor search
         ttk.Label(parent_frame, text="Search for Doctors", font=("Arial", 14, "bold")).grid(row=0, column=0, columnspan=2, pady=10)
         
-        ttk.Label(parent_frame, text="Employee ID:").grid(row=0, column=0, sticky="w", padx=5, pady=5)
+        ttk.Label(parent_frame, text="Employee ID:").grid(row=1, column=0, sticky="w", padx=5, pady=5)
         self.doctor_id_entry = ttk.Entry(parent_frame)
         self.doctor_id_entry.grid(row=1, column=1, sticky="ew", padx=5, pady=5)
 
@@ -115,7 +115,7 @@ class MainApp(tk.Tk):
         ttk.Button(parent_frame, text="Search", command=self.search_doctors).grid(row=4, column=0, columnspan=2, pady=10)
 
         # Results field
-        self.doctor_results_text = tk.Text(parent_frame, wrap=tk.WORD, height=20, width=70, state=tk.DISABLED)
+        self.doctor_results_text = tk.Text(parent_frame, wrap=tk.WORD, height=20, width=70)
         self.doctor_results_text.grid(row=5, column=0, columnspan=2, padx=5, pady=5, sticky="nsew")
 
         # Grid configuration
@@ -158,7 +158,7 @@ class MainApp(tk.Tk):
         ttk.Button(parent_frame, text="Search", command=self.get_patient_records).grid(row=2, column=0, columnspan=2, pady=10)
 
         # Results field
-        self.records_results_text = tk.Text(parent_frame, wrap=tk.WORD, height=20, width=70, state=tk.DISABLED)
+        self.records_results_text = tk.Text(parent_frame, wrap=tk.WORD, height=20, width=70)
         self.records_results_text.grid(row=3, column=0, columnspan=2, padx=5, pady=5, sticky="nsew")
         
         # Grid configuration
@@ -197,7 +197,7 @@ class MainApp(tk.Tk):
         ttk.Button(parent_frame, text="Search", command=self.get_doctors_patients).grid(row=2, column=0, columnspan=2, pady=10)
 
         # Results field
-        self.doc_patients_results_text = tk.Text(parent_frame, wrap=tk.WORD, height=20, width=70, state=tk.DISABLED)
+        self.doc_patients_results_text = tk.Text(parent_frame, wrap=tk.WORD, height=20, width=70)
         self.doc_patients_results_text.grid(row=3, column=0, columnspan=2, padx=5, pady=5, sticky="nsew")
         
         # Grid configuration
