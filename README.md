@@ -1,6 +1,6 @@
 # Hospital Desktop – Backend (Python + MySQL)
 
-Backend data layer for a local Tkinter app.
+Restructured backend data layer for a local Tkinter app.
 This module provides read-only queries over the Patient, Doctor, Medical_Record, and Billing tables.
 
 Requirements
@@ -11,7 +11,7 @@ Requirements
 
 Setup
 1) Place db.py at the project root.
-2) Create a .env next to db.py:
+2) Create a .env next to updated_db.py:
 
 		DB_HOST=127.0.0.1
 		DB_PORT=3306
@@ -20,7 +20,7 @@ Setup
 		DB_NAME=hospital_db
 
 Quick Test
-    python db.py
+    python updated_db.py
 
 Expected:
 
@@ -33,11 +33,8 @@ Expected:
 What the module exposes (all return list[dict] except _count functions)
 - ping_db()
 - find_patients(...)
-- medical_records_for_patient(mrn)
-- billing_for_patient(mrn)
 - total_patients_count(...)
 - find_doctors(...)
-- patients_for_doctor(employee_id)
 - total_doctors_count(...)
 - find_medical_records(...)
 - total_medrecs_count(...)
@@ -48,7 +45,7 @@ Schema assumptions
 - Patient: MRN (PK), First_Name, Last_Name, Birthdate
 - Doctor: Employee_ID (PK), First_Name, Last_Name, Specialty
 - Medical_Record: Record_ID (PK), Patient_MRN (FK), Doctor_ID (FK), Admission_Date, Diagnosis
-- Billing: Bill_ID (PK), Patient_MRN (FK), Insurance_Name, Amount_Due, Amount_Paid
+- Billing: Bill_ID (PK), Patient_MRN (FK), Insurance_Provider, Amount_Due, Amount_Paid
 
 Troubleshooting
 - Cannot connect: check MySQL and .env.
